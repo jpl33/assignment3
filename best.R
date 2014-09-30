@@ -5,17 +5,17 @@
 
 best<-function(state, outcome){
   #"state" parameter check
-  
+  stateN<-7
   #"outcome" parameter check
-  
+  if (outcome=="heart attack"){outcomeN<-11}
   #read the file into a data frame
   df<-read.csv("outcome-of-care-measures.csv")
   #order df according to state,outcome value, hospital name
-  df[order(state,outcome,hospital name]),]
+  df<-df[order(stateN,outcomeN,"hospital name"),]
   #create logical vector for rows where "state" column equals "state" parameter
-  st<-hospitals[,"state"]<-state 
+  st<-df[,"state"]<-state 
   #get first line of "state" hospitals, get min "outcome" value as benchmark
-  min<-hospitals[state,][1,"hospital Name"]
+  min<-df[state,][1,"hospital Name"]
   min
   
 }
