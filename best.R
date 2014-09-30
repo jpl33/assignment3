@@ -12,6 +12,10 @@ lowest<-function(hospitals){
     hospital<-c(hospital,hospitals[i+1,i+1])
     i<-i+1
   }
+  #sort hospital vector
+  sort(hospital)
+  #return first (lowest alphabetical) hospital
+  hospital[1]
 }
 
 best<-function(state, outcome){
@@ -20,10 +24,20 @@ best<-function(state, outcome){
   #"outcome" parameter check
   
   #read the file into a data frame
-  
-  #create a matrix with "hospital name" and the "outcome" columns from the data frame
-  
+  df<-read.csv("outcome-of-care-measures.csv")
+  #create a matrix with "hospital name", "state" and the "outcome" columns from the data frame
+  hospitals<-matrix(0,nrow(df),3)
+  hospitals[,1]<df[,"hospital name"]
+  hospitals[,1]<df[,outcome]
   #order the matrix according to "outcome" column
+  
+  #run "lowest" function which returns the lowest alphabetical name of the lowest ranked (best) hospital
   
   
 }
+
+# z1<-c(1,2,3,4,5,6,7,1)
+# z2<-c("il","il","az","tx","az","tx","tx","il")
+# z3<-c("amka","zfat","jones","sloan","morgan","bendict","carter","afula")
+# tst<-cbind(z1,z2,z3)
+#tst[order(z2,z1,z3),]
