@@ -25,12 +25,9 @@ best<-function(state, outcome){
   
   #read the file into a data frame
   df<-read.csv("outcome-of-care-measures.csv")
-  #create a matrix with "hospital name", "state" and the "outcome" columns from the data frame
-  hospitals<-matrix(0,nrow(df),3)
-  hospitals[,1]<df[,"hospital name"]
-  hospitals[,1]<df[,outcome]
-  #order the matrix according to "outcome" column
-  
+  #order df according to state,outcome, hospital name
+  df[order(state,outcome,hospital name]),]
+    
   #run "lowest" function which returns the lowest alphabetical name of the lowest ranked (best) hospital
   
   
