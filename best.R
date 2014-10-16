@@ -7,10 +7,14 @@ best<-function(state, outcome){
   #"state" parameter check
   stateN<-7
   #"outcome" parameter check
-  #if (outcome=="heart attack"){outcomeN<-11}
+  #match outcome column to outcome name
   outcomeN<-switch(outcome,"heart attack"=11,"heart failure"=17,"pneumonia"=23)
+  #check that proper outcome was submitted! it's actually easier to do it in this order, even though it is less logical :-)
+  if(is.null(outcomeN)){ stop("Invalid outcome")}
   #read the file into a data frame
-  df<-read.csv("outcome-of-care-measures.csv")#,stringsAsFactors = FALSE)
+  df<-read.csv("outcome-of-care-measures.csv")
+  #
+  if(!any(df[,stateN]==state)){stop("Invalid State")}
   #order df according to state,outcome value, hospital name
   #force treatment of outcome as "numeric" instead of "factor"!
   df<-df[order(df[,stateN],as.numeric(as.character(df[,outcomeN])),df[,"Hospital.Name"]),]
