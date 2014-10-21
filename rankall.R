@@ -27,7 +27,7 @@ rankall<-function(outcome,num="best"){
   #initialize dataframe
   result<-data.frame(state=character(0),hospital=character(0))
   levels(result[,"state"])<-levels(df[,stateN])
-  levels(result[,"hospital"])<-levels(df[,"Hospital.Name"])
+  #levels(result[,"hospital"])<-levels(df[,"Hospital.Name"])
   
   #iterate through statelist, pick each hospital in "rank" for each state 
   for (i in 1:length(statelist)){
@@ -36,21 +36,22 @@ rankall<-function(outcome,num="best"){
     st<-df[,stateN]==statelist[i] 
     
     #what state are we in?
-    result[i,"state"]<-as.character(statelist[i])
+    #result[i,"state"]<-as.character(statelist[i])
     
     #if rank is not "worst", choose from list of "state" hospitals, the one ranked in "rank" 
-    if (rank!= -1){result[i,"hospital"]<-as.character(df[st,][rank,"Hospital.Name"])
+    if (rank!= -1){
+    #  result[,"hospital"]<-as.character(result[,"hospital"])
+    #  result[i,"hospital"]<-as.character(df[st,][rank,"Hospital.Name"])
+     # result[,"hospital"]<-factor(result[,"hospital"])
+    result<-rbind(result,data.frame(state=statelist[i],hospital=as.character(df[st,][rank,"Hospital.Name"])))
                    }
     else {
-      #is  "rank" invalid  for this state? if so, make "hospital" NA
-      if (rank<1 || rank>nrow(df[st,])){ 
-        result[i,"hospital"]<-NA
-      }
-      #if it IS valid, find the apropriate ranked hospital
-      else{
-        result[i,"hospital"]<-as.character(df[st,][which.max(na.omit(as.character(df[st,outcomeN]))),"Hospital.Name"])
+     # result[,"hospital"]<-as.character(result[,"hospital"])
+    #  result[i,"hospital"]<-as.character(df[st,][which.max(na.omit(as.character(df[st,outcomeN]))),"Hospital.Name"])
+     # result[,"hospital"]<-factor(result[,"hospital"])
+      result<-rbind(result,data.frame(state=statelist[i],hospital=as.character(df[st,][which.max(na.omit(as.character(df[st,outcomeN]))),"Hospital.Name"])))
           }
-  }
+  
     
 }
 result
